@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "760064406384",
+    "project_id": "gvm-project-d48af",
+    "storage_bucket": "gvm-project-d48af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760064406384:android:216c1b6934a81a1c2795b5",
+        "android_client_info": {
+          "package_name": "com.example.admin_gvm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhWGY_nmjO8Tt8B5vnOqjkbP4Sh19oRWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760064406384:android:f7f0deb8682f6b352795b5",
+        "android_client_info": {
+          "package_name": "com.example.gvm_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhWGY_nmjO8Tt8B5vnOqjkbP4Sh19oRWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
