@@ -12,11 +12,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isObscure = true;
   final _auth = FirebaseAuth.instance;
+
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _signIn() async {
+  Future<void> _signIn() async {
     String email = emailController.text;
     String password = passwordController.text;
 
@@ -176,13 +178,34 @@ class _LoginScreenState extends State<LoginScreen> {
         email: email, password: password);
     if (user != null) {
       Navigator.pushNamed(context, DashboardScreen.id);
+    }else{
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('check status'),
+          content: Text(
+              'Log'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
     }
+
+
   }
 }
 
 class ForgotPasswordScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Forgot Password'),

@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../component/const.dart';
+import '../components/components.dart';
 
 class ListPages extends StatelessWidget {
   static String id = 'listpage';

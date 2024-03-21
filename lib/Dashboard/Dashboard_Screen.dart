@@ -1,7 +1,7 @@
 import 'package:admin_gvm/Form/listpage.dart';
 import 'package:flutter/material.dart';
 
-import '../component/const.dart';
+import '../components/components.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
