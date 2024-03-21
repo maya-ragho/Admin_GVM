@@ -1,18 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class ForgotScreen extends StatefulWidget {
+  const ForgotScreen({super.key});
 
-  //static  String id = 'forgot_password_screen';
-  static String ky = 'forgot';
+  static const String id = 'forgot_password_screen';
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
-  //_ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
+  State<ForgotScreen> createState() => _ForgotScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class _ForgotScreenState extends State<ForgotScreen> {
   final TextEditingController _emailController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isSending = false;
@@ -90,8 +88,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               //   Navigator.pushNamed(
               //       context, ForgotPasswordScreen.id);
               // },
-               onPressed: _isSending ? null : _resetPassword,
-              child: _isSending ? const CircularProgressIndicator() : const Text('Reset Password'),
+              onPressed: _isSending ? null : _resetPassword,
+              child: _isSending
+                  ? const CircularProgressIndicator()
+                  : const Text('Reset Password'),
             ),
           ],
         ),
