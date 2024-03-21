@@ -1,6 +1,8 @@
 import 'package:admin_gvm/Form/listpage.dart';
 import 'package:flutter/material.dart';
 
+import '../component/const.dart';
+
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
   static String id = 'dashboardscreen';
@@ -12,14 +14,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Dashboard',
-          style: TextStyle(color: Colors.cyan, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.black,
-      ),
+      appBar: custombar(context),
       body: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -72,14 +67,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         //   ),
                         // ),
 
-
                         SizedBox(
                           width: 150.0,
                           height: 210.0,
                           child: GestureDetector(
                             onTap: () {
                               Navigator.pushNamed(context, ListPages.id);
-
                             },
                             child: Column(
                               children: [
