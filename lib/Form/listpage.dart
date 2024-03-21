@@ -14,8 +14,9 @@ class ListPages extends StatelessWidget {
       appBar: custombar(context),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection('users')
-            .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+            .collection('visitor')
+            .where('selectedAdmin',
+                isEqualTo: FirebaseAuth.instance.currentUser!.email)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
