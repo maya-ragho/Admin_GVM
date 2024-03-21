@@ -1,7 +1,10 @@
+import 'package:admin_gvm/Dashboard/Dashboard_Screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../Dashboard/Dashboard_Screen.dart';
 import 'loginScreen.dart';
+
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
   static String id = 'signupscreen';
@@ -16,7 +19,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isObscure = true;
-
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -113,12 +116,12 @@ class _SignupScreenState extends State<SignupScreen> {
                           labelStyle: const TextStyle(color: Colors.white),
                           enabledBorder: OutlineInputBorder(
                             borderSide:
-                            const BorderSide(width: 3, color: Colors.blue),
+                                const BorderSide(width: 3, color: Colors.blue),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide:
-                            const BorderSide(width: 3, color: Colors.red),
+                                const BorderSide(width: 3, color: Colors.red),
                             borderRadius: BorderRadius.circular(15),
                           ),
                         ),
@@ -207,18 +210,31 @@ class _SignupScreenState extends State<SignupScreen> {
                         height: h * 0.07,
                         width: w * 0.5,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState != null &&
                                 _formKey.currentState!.validate()) {
-                               Navigator.push(
-                                 context,
-                                 MaterialPageRoute(
-                                   builder: (context) => DashboardScreen(),
-                                ),
+                              final newuser =
+                                  await _auth.createUserWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text,
                               );
+                              if (newuser != null) {
+                                await FirebaseFirestore.instance
+                                    .collection('visitor')
+                                    .add({
+                                  'name': nameController.text,
+                                  'email': emailController.text,
+                                  'phone': contactController.text,
+                                });
+                                Navigator.pushNamed(
+                                    context, DashboardScreen.id);
+                              }
                             }
                           },
-                          child: const Text('Sign Up', style: TextStyle(color: Colors.redAccent),),
+                          child: const Text(
+                            'Sign Up',
+                            style: TextStyle(color: Colors.redAccent),
+                          ),
                         ),
                       ),
                       TextButton(
@@ -230,7 +246,10 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           );
                         },
-                        child: const Text('I have account?', style: TextStyle(color: Colors.white),),
+                        child: const Text(
+                          'I have account?',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),

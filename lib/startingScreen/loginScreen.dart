@@ -1,7 +1,9 @@
 import 'package:admin_gvm/startingScreen/signupPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../Dashboard/Dashboard_Screen.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
   static String id = 'loginscreen';
@@ -14,6 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isObscure = true;
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +112,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                         const SizedBox(height: 20),
-
                         const SizedBox(height: 20),
                         ButtonTheme(
                           minWidth: double.infinity,
@@ -121,13 +123,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: () {
                                 if (_formKey.currentState != null &&
                                     _formKey.currentState!.validate()) {
-                                Navigator.pushNamed(
-                                    context, DashboardScreen.id);
-                                 }
+                                  _signIn();
+                                }
                               },
-                              child: Text('Login',style: TextStyle(
-                                color: Colors.black
-                              ),),
+                              child: Text(
+                                'Login',
+                                style: TextStyle(color: Colors.black),
+                              ),
                             ),
                           ),
                         ),
@@ -141,7 +143,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             );
                           },
-                          child: Text('Forgot Password?', ),
+                          child: Text(
+                            'Forgot Password?',
+                          ),
                         ),
                         TextButton(
                           onPressed: () {
@@ -162,6 +166,17 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void _signIn() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    final user = await _auth.signInWithEmailAndPassword(
+        email: email, password: password);
+    if (user != null) {
+      Navigator.pushNamed(context, DashboardScreen.id);
+    }
   }
 }
 

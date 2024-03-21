@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../component/const.dart';
 
 class ListPages extends StatelessWidget {
   static String id = 'listpage';
@@ -9,16 +12,12 @@ class ListPages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Dashboard',
-          style: TextStyle(color: Colors.cyan, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.black,
-      ),
+      appBar: custombar(context),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('visitor').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.hasData) {
@@ -44,7 +43,7 @@ class ListPages extends StatelessWidget {
                               builder: (context) => AlertDialog(
                                 title: Text('check status'),
                                 content: Text(
-                                    'Your appointment with ${document['name']} has been booked.'),
+                                    'Your appointment is  ${document['status']} .'),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
@@ -56,20 +55,16 @@ class ListPages extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Text('Book Appointment'),
+                          child: Text('Check Status'),
                         ),
                       ),
                     );
                   });
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text(snapshot.error.toString()),
-              );
             } else {
-              return const Center(child: Text('No data found'));
+              return Center(child: Text('No data found'));
             }
           } else {
-            return const Center(
+            return Center(
               child: CircularProgressIndicator(),
             );
           }
