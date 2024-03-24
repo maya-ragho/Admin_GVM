@@ -1,6 +1,8 @@
+import 'package:admin_gvm/Dashboard/profilepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 import '../components/components.dart';
 
 class ListPages extends StatelessWidget {
@@ -38,20 +40,10 @@ class ListPages extends StatelessWidget {
                         ),
                         trailing: ElevatedButton(
                           onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                title: Text('check status'),
-                                content: Text(
-                                    'Your appointment is  ${document['status']} .'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('OK'),
-                                  ),
-                                ],
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Profilepage(document.id),
                               ),
                             );
                           },

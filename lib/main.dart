@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:admin_gvm/Dashboard/profilepage.dart';
 import 'package:admin_gvm/startingScreen/forgotpassword.dart';
 import 'package:admin_gvm/startingScreen/loginScreen.dart';
 import 'package:admin_gvm/startingScreen/onboarding_screen.dart';
@@ -8,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'Dashboard/Dashboard_Screen.dart';
+import 'Dashboard/forwordscreen.dart';
 import 'Form/listpage.dart';
 
 Future<void> main() async {
@@ -47,6 +49,24 @@ class MyApp extends StatelessWidget {
         DashboardScreen.id: (context) => const DashboardScreen(),
         ListPages.id: (context) => const ListPages(),
         ForgotScreen.id: (context) => const ForgotScreen(),
+        Profilepage.id: (context) {
+          final args = ModalRoute.of(context)?.settings.arguments;
+          if (args is String) {
+            return Profilepage(args);
+          }
+          // Handle other cases if needed
+          return const Profilepage(
+              ''); // Provide a default value or handle the case as per your app logic
+        },
+        ForwordScreen.id: (context) {
+          final args = ModalRoute.of(context)?.settings.arguments;
+          if (args is String) {
+            return ForwordScreen(args);
+          }
+          // Handle other cases if needed
+          return const ForwordScreen(
+              ''); // Provide a default value or handle the case as per your app logic
+        },
       },
     );
   }
