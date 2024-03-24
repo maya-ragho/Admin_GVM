@@ -220,7 +220,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               );
                               if (newuser != null) {
                                 await FirebaseFirestore.instance
-                                    .collection('visitor')
+                                    .collection('admin')
                                     .add({
                                   'name': nameController.text,
                                   'email': emailController.text,
