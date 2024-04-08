@@ -2,7 +2,6 @@ import 'package:admin_gvm/Dashboard/Dashboard_Screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'loginScreen.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -20,20 +19,19 @@ class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isObscure = true;
   final _auth = FirebaseAuth.instance;
+
+  Future<void> _signUp() async {
+  }
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      //appBar: custombar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Stack(children: [
-            Image.asset('assets/images/office.jpg',
-                fit: BoxFit.fitHeight,
-                alignment: Alignment.center,
-                width: w,
-                height: h),
             Container(
               padding: EdgeInsets.only(
                   left: w * 0.04, right: w * 0.04, top: h * 0.15),
@@ -46,53 +44,83 @@ class _SignupScreenState extends State<SignupScreen> {
                       Text('Signup Screen',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 30,
-                              color: Colors.red)),
+                              fontSize: 30)),
+                      SizedBox(height: h * 0.03),
+
                       TextFormField(
                         controller: nameController,
-                        style: const TextStyle(color: Colors.green),
+                        style: const TextStyle(color: Colors.black),
                         // Set text color
+                        maxLines: 3, // Maximum lines allowed
+                        minLines: 1, // Minimum lines allowed
+
                         decoration: InputDecoration(
                           labelText: 'Name',
-                          hintText: 'Enter youe name',
-                          labelStyle: const TextStyle(color: Colors.white),
+                          hintText: 'Enter your name',
+                          prefixIcon: Icon(Icons.person),
+                          labelStyle: const TextStyle(color: Colors.black),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(width: 3, color: Colors.blue),
+                            borderSide: const BorderSide(width: 2, color: Colors.black),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(width: 3, color: Colors.red),
+                            borderSide: const BorderSide(width: 2, color: Colors.blueGrey),
                             borderRadius: BorderRadius.circular(15),
                           ),
                         ),
+
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your name';
+                          List<String Function(String?)> validators = [
+                                (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your name';
+                              }
+                              return '';
+                            },
+                                (value) {
+                              if (value != null && value.length < 3) {
+                                return 'Name must be at least 3 characters';
+                              }
+                              return '';
+                            },
+                                (value) {
+                              if (value != null && value.length > 30) {
+                                return 'Name must be less than 30 characters';
+                              }
+                              return '';
+                            },
+                            // Add additional validators as needed
+                          ];
+
+                          for (var validator in validators) {
+                            final error = validator(value);
+                            if (error.isNotEmpty) {
+                              return error;
+                            }
                           }
-                          // Add additional name validation here if needed
-                          return null;
+                          return ''; // Return empty string if all validators pass
                         },
                       ),
+
+
+
                       const SizedBox(height: 20),
-                      // Added SizedBox for spacing
                       TextFormField(
                         controller: emailController,
-                        style: const TextStyle(color: Colors.green),
+                        style: const TextStyle(color: Colors.black),
                         // Set text color
                         decoration: InputDecoration(
                           labelText: 'Email',
                           hintText: 'Enter your email',
+                          prefixIcon: Icon(Icons.email_outlined),
+
                           labelStyle: const TextStyle(color: Colors.black),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(width: 3, color: Colors.blue),
+                            borderSide: const BorderSide(width: 2, color: Colors.black),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(width: 3, color: Colors.red),
+                            borderSide: const BorderSide(width: 3, color: Colors.blueGrey),
                             borderRadius: BorderRadius.circular(15),
                           ),
                         ),
@@ -100,28 +128,33 @@ class _SignupScreenState extends State<SignupScreen> {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email';
                           }
+                          // Email format validation
+                          final emailRegExp = RegExp(
+                              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                          if (!emailRegExp.hasMatch(value)) {
+                            return 'Please enter a valid email';
+                          }
                           // Add additional email validation here if needed
                           return null;
                         },
                       ),
                       const SizedBox(height: 20),
-
                       TextFormField(
                         controller: contactController,
                         keyboardType: TextInputType.number,
-                        style: const TextStyle(color: Colors.green),
+                        style: const TextStyle(color: Colors.black),
                         // Set text color
                         decoration: InputDecoration(
                           labelText: 'Contact Number',
-                          labelStyle: const TextStyle(color: Colors.white),
+                          hintText: 'Enter your contact number',
+                          prefixIcon: Icon(Icons.call),
+                          labelStyle: const TextStyle(color: Colors.black),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(width: 3, color: Colors.blue),
+                            borderSide: const BorderSide(width: 3, color: Colors.black),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(width: 3, color: Colors.red),
+                            borderSide: const BorderSide(width: 3, color: Colors.blueGrey),
                             borderRadius: BorderRadius.circular(15),
                           ),
                         ),
@@ -129,28 +162,34 @@ class _SignupScreenState extends State<SignupScreen> {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your contact number';
                           }
-                          // Add additional contact number validation here if needed
+                          // Check if entered value contains only digits and has a length of 10
+                          final isValidNumber = RegExp(r'^\d{10}$').hasMatch(value);
+                          if (!isValidNumber) {
+                            return 'Please enter a valid 10-digit number';
+                          }
                           return null;
                         },
                       ),
+
+
                       const SizedBox(height: 20),
 
                       TextFormField(
                         controller: passwordController,
                         obscureText: _isObscure,
-                        style: const TextStyle(color: Colors.green),
+                        style: const TextStyle(color: Colors.black),
                         // Set text color
                         decoration: InputDecoration(
                           labelText: 'Password',
+                          hintText: 'Enter your password',
+                          prefixIcon: Icon(Icons.password),
                           labelStyle: const TextStyle(color: Colors.black),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(width: 3, color: Colors.blue),
+                            borderSide: const BorderSide(width: 2, color: Colors.black),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(width: 3, color: Colors.red),
+                            borderSide: const BorderSide(width: 3, color: Colors.blueGrey),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           suffixIcon: IconButton(
@@ -168,48 +207,48 @@ class _SignupScreenState extends State<SignupScreen> {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your password';
                           }
+                          if (value.length < 7) {
+                            return 'Password must be at least 7 characters long';
+                          }
                           // Add additional password validation here if needed
                           return null;
                         },
                       ),
+
                       const SizedBox(height: 20),
-// Added SizedBox for spacing
                       TextFormField(
                         obscureText: _isObscure,
-                        style: const TextStyle(color: Colors.green),
+                        style: const TextStyle(color: Colors.black),
                         // Set text color
                         decoration: InputDecoration(
                           labelText: 'Confirm Password',
-                          labelStyle: const TextStyle(color: Colors.white),
+                          prefixIcon: Icon(Icons.password),
+                          labelStyle: const TextStyle(color: Colors.black),
                           enabledBorder: OutlineInputBorder(
                             borderSide:
-                                const BorderSide(width: 3, color: Colors.blue),
+                                const BorderSide(width: 2, color: Colors.black),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderSide:
-                                  const BorderSide(width: 3, color: Colors.red),
+                                  const BorderSide(width: 3, color: Colors.blueGrey),
                               borderRadius: BorderRadius.circular(15)),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please confirm your password';
+                            return 'Please conform your password';
                           } else if (value != passwordController.text) {
                             return 'Passwords do not match';
                           }
                           return null;
                         },
                       ),
-
                       const SizedBox(height: 20),
-                      // Added SizedBox for spacing
-
-                      const SizedBox(height: 20),
-                      // Added SizedBox for spacing
                       SizedBox(
                         height: h * 0.07,
                         width: w * 0.5,
                         child: ElevatedButton(
+
                           onPressed: () async {
                             if (_formKey.currentState != null &&
                                 _formKey.currentState!.validate()) {
@@ -231,9 +270,10 @@ class _SignupScreenState extends State<SignupScreen> {
                               }
                             }
                           },
-                          child: const Text(
+                          child:  Text(
                             'Sign Up',
                             style: TextStyle(color: Colors.redAccent),
+
                           ),
                         ),
                       ),
@@ -248,7 +288,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         },
                         child: const Text(
                           'I have account?',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ],
@@ -260,5 +300,9 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+    }
   }
-}
+
+
+
+

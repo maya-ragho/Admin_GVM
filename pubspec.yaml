@@ -40,8 +40,11 @@ dependencies:
   firebase_auth: ^4.6.3
   firebase_storage: ^11.2.4
   image_picker: ^1.0.7
-
-
+  flutter_local_notifications: ^17.0.0
+  firebase_messaging: ^14.4.0
+  fluttertoast: ^8.2.4
+  get: ^4.6.6
+  http: ^1.2.0
 
 dev_dependencies:
   flutter_test:

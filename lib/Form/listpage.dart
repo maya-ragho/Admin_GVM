@@ -8,10 +8,10 @@ import '../components/components.dart';
 class ListPages extends StatelessWidget {
   static String id = 'listpage';
 
-  const ListPages({super.key});
+  const ListPages({super.key, required id});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       appBar: custombar(context),
       body: StreamBuilder(

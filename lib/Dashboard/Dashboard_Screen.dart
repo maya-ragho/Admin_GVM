@@ -1,6 +1,5 @@
 import 'package:admin_gvm/Form/listpage.dart';
 import 'package:flutter/material.dart';
-
 import '../components/components.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -45,28 +44,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        // SizedBox(
-                        //   width: 150.0,
-                        //   height: 210.0,
-                        //   child: GestureDetector(
-                        //     onTap: () {
-                        //       // Navigator.pushReplacement(context, 'listpage');
-                        //     },
-                        //     child: Column(
-                        //       children: [
-                        //         Image.asset(
-                        //           'assets/images/create.png',
-                        //           fit: BoxFit.cover,
-                        //         ),
-                        //         const Text(
-                        //           'create Request',
-                        //           style: TextStyle(fontWeight: FontWeight.bold),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
-
                         SizedBox(
                           width: 150.0,
                           height: 210.0,
@@ -82,7 +59,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const Text(
                                   'check Request',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
                                 )
                               ],
                             ),
@@ -100,3 +77,4 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 }
+
