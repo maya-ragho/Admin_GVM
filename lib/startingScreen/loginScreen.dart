@@ -2,7 +2,10 @@ import 'package:admin_gvm/startingScreen/signupPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import '../Dashboard/Dashboard_Screen.dart';
+import 'forgotpassword.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
   static String id = 'loginscreen';
@@ -11,7 +14,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -22,12 +24,12 @@ class _LoginScreenState extends State<LoginScreen> {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.height;
     return Scaffold(
-    //  appBar: custombar(context),
+      //  appBar: custombar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.only(
-                left: w * 0.04, right: w * 0.04, top: h * 0.14),
+            padding:
+                EdgeInsets.only(left: w * 0.04, right: w * 0.04, top: h * 0.14),
             child: Center(
               child: Form(
                 key: _formKey,
@@ -49,11 +51,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         prefixIcon: Icon(Icons.email_outlined),
                         labelStyle: const TextStyle(color: Colors.black),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(width: 2, color: Colors.black),
+                          borderSide:
+                              const BorderSide(width: 2, color: Colors.black),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(width: 3, color: Colors.blueGrey),
+                          borderSide: const BorderSide(
+                              width: 3, color: Colors.blueGrey),
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
@@ -71,8 +75,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         return null;
                       },
                     ),
-
-
                     const SizedBox(height: 20),
                     TextFormField(
                       controller: passwordController,
@@ -85,11 +87,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         prefixIcon: Icon(Icons.password),
                         labelStyle: const TextStyle(color: Colors.black),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(width: 2, color: Colors.black),
+                          borderSide:
+                              const BorderSide(width: 2, color: Colors.black),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(width: 3, color: Colors.blueGrey),
+                          borderSide: const BorderSide(
+                              width: 3, color: Colors.blueGrey),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         suffixIcon: IconButton(
@@ -114,7 +118,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         return null;
                       },
                     ),
-
                     const SizedBox(height: 20),
                     const SizedBox(height: 20),
                     ButtonTheme(
@@ -198,49 +201,4 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     }
   }
-
-  }
-
-class ForgotPasswordScreen extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Forgot Password'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Please enter your email to reset your password.',
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-            Container(
-              width: 300,
-              child: TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Perform password reset operation
-              },
-              child: const Text('Reset Password'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
-
-
