@@ -20,9 +20,9 @@ class _ProfilepageState extends State<Profilepage> {
   List<String> stat = [
     'Approved',
     'Denied',
-    'Wait 10 min',
-    'Wait 15 min',
-    'Wait 20 min',
+    'After  10 min',
+    'After  15 min',
+    'After  20 min',
   ];
 
   Future<DocumentSnapshot> fetchUserData(String documentId) async {
