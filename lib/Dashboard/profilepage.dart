@@ -82,8 +82,8 @@ class _ProfilepageState extends State<Profilepage> {
                           IconButton(
                             icon: const Icon(
                               Icons.share,
-                              size: 50.0,
-                              color: Colors.lightGreenAccent,
+                              size: 40.0,
+                              color: Colors.black,
                             ),
                             onPressed: () {
                               Navigator.push(

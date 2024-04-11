@@ -2,6 +2,8 @@ import 'package:admin_gvm/startingScreen/signupPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../Dashboard/Dashboard_Screen.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -22,7 +24,15 @@ class _LoginScreenState extends State<LoginScreen> {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.height;
     return Scaffold(
-    //  appBar: custombar(context),
+      appBar: PreferredSize(
+        child: ClipPath(
+          clipper: CurveAppBar(),
+          child: AppBar(
+            backgroundColor: Color(0xFF7BE3FA),
+          ),
+        ),
+        preferredSize: Size.fromHeight(150),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -140,12 +150,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ForgotPasswordScreen(),
-                          ),
-                        );
+                        Get.to(ForgotPasswordScreen());
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => ForgotPasswordScreen(),
+                        //   ),
+                        // );
                       },
                       child: Text(
                         'Forgot Password?',
@@ -153,6 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextButton(
                       onPressed: () {
+                         //Get.to(SignupScreen.id);
                         Navigator.pushNamed(
                           context,
                           SignupScreen.id,
@@ -244,3 +256,23 @@ class ForgotPasswordScreen extends StatelessWidget {
 }
 
 
+class CurveAppBar extends CustomClipper<Path>{
+  @override
+  Path getClip(Size size){
+    final Path path = Path();
+    path.moveTo(0,0);
+    path.lineTo(0, size.height - 20);
+    path.quadraticBezierTo(
+        size.width / 5, size.height / 2.5, size.width /2, size.height - 50);
+    path.quadraticBezierTo(
+        size.width * 3 / 4, size.height, size.width, size.height - 50);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper){
+    throw UnimplementedError();
+  }
+}

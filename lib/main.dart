@@ -73,8 +73,7 @@ class MyApp extends StatelessWidget {
             return ForwordScreen(args);
           }
           // Handle other cases if needed
-          return const ForwordScreen(
-              ''); // Provide a default value or handle the case as per your app logic
+          return const ForwordScreen(''); // Provide a default value or handle the case as per your app logic
         },
       },
     );
