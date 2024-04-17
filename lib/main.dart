@@ -5,6 +5,7 @@ import 'package:admin_gvm/startingScreen/loginScreen.dart';
 import 'package:admin_gvm/startingScreen/onboarding_screen.dart';
 import 'package:admin_gvm/startingScreen/signupPage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,15 +14,15 @@ import 'Dashboard/forwordscreen.dart';
 import 'Form/listpage.dart';
 
 //
-// @pragma('vm:entry-point')
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message)async {
-//   await Firebase.initializeApp();
-//}
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message)async {
+  await Firebase.initializeApp();
+}
 Future<void> main() async {
   //
-  // WidgetsFlutterBinding.ensureInitialized();
-  //  await Firebase.initializeApp();
-  //  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  WidgetsFlutterBinding.ensureInitialized();
+   // await Firebase.initializeApp();
+   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   WidgetsFlutterBinding.ensureInitialized();
   Platform.isAndroid
