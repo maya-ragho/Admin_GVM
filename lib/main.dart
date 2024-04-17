@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:admin_gvm/Dashboard/profilepage.dart';
 import 'package:admin_gvm/startingScreen/loginScreen.dart';
 import 'package:admin_gvm/startingScreen/onboarding_screen.dart';
@@ -6,6 +7,7 @@ import 'package:admin_gvm/startingScreen/signupPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'Dashboard/Dashboard_Screen.dart';
 import 'Dashboard/forwordscreen.dart';
 import 'Form/listpage.dart';
@@ -55,8 +57,10 @@ class MyApp extends StatelessWidget {
         LoginScreen.id: (context) => const LoginScreen(),
         SignupScreen.id: (context) => const SignupScreen(),
         DashboardScreen.id: (context) => DashboardScreen(),
-        ListPages.id: (context) => const ListPages(id: null,),
-       // ForgotPasswordPage.id: (context) =>  ForgotPasswordPage(key: null,),
+        ListPages.id: (context) => const ListPages(
+              id: null,
+            ),
+        // ForgotPasswordPage.id: (context) =>  ForgotPasswordPage(key: null,),
         Profilepage.id: (context) {
           final args = ModalRoute.of(context)?.settings.arguments;
           if (args is String) {
@@ -72,7 +76,8 @@ class MyApp extends StatelessWidget {
             return ForwordScreen(args);
           }
           // Handle other cases if needed
-          return const ForwordScreen(''); // Provide a default value or handle the case as per your app logic
+          return const ForwordScreen(
+              ''); // Provide a default value or handle the case as per your app logic
         },
       },
     );
