@@ -1,9 +1,9 @@
-import 'package:admin_gvm/Form/listpage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../components/components.dart';
+
+import '../Form/listpage.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
   static String id = 'dashboardscreen';
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -13,68 +13,102 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: custombar(context),
-      body: Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(2000),
-              topLeft: Radius.circular(1160)),
-          gradient: LinearGradient(
-            begin: Alignment.bottomLeft,
-            end: Alignment(0.8, 1),
-            colors: <Color>[
-              Color(0xff1b2f5f),
-              Color(0xff1c3163),
-            ],
-            // tileMode: Tilemode.mirror,
-          ),
-        ),
-        child: Center(
-          child: SafeArea(
+      body: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                color: Color(0xFF7BE3FA),
+                borderRadius:
+                const BorderRadius.only(bottomRight: Radius.circular(50))),
             child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 80,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(
-                          width: 150.0,
-                          height: 210.0,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, ListPages.id);
-                            },
-                            child: Column(
-                              children: [
-                                Image.asset(
-                                  'assets/images/check_2.png',
-                                  fit: BoxFit.cover,
-                                ),
-                                const Text(
-                                  'check Request',
-                                  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                const SizedBox(height: 50),
+                ListTile(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 30),
+                  title: Text(
+                    'Hi Admin',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(color: Colors.white),
                   ),
-                )
+                  subtitle: Text(
+                    'Good Morning',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(color: Colors.white),
+                  ),
+                  trailing: const CircleAvatar(
+                    radius: 30,
+                    backgroundImage: AssetImage('assets/images/hello.png'),
+                  ),
+                ),
+                const SizedBox(height: 50),
               ],
             ),
           ),
-        ),
+          Container(
+            color: Color(0xFF7BE3FA),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius:
+                  BorderRadius.only(topLeft: Radius.circular(100))),
+              child: GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 2,
+                crossAxisSpacing: 40,
+                mainAxisSpacing: 30,
+                children: [
+                  itemDashboard('Check', Icons.check, Colors.green, () {
+                    Navigator.pushNamed(context, ListPages.id);
+                  }),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
-}
 
+  Widget itemDashboard(String title, IconData iconData, Color background, VoidCallback onTap) => InkWell(
+    onTap: onTap,
+    child: Container(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+                offset: const Offset(0, 5),
+                color: Theme.of(context).primaryColor.withOpacity(.2),
+                spreadRadius: 2,
+                blurRadius: 5)
+          ]),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(color: background, shape: BoxShape.circle),
+            child: Icon(
+              iconData,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium,
+          )
+        ],
+      ),
+    ),
+  );
+}

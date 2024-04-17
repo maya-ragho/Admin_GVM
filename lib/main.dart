@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:admin_gvm/Dashboard/profilepage.dart';
 import 'package:admin_gvm/startingScreen/loginScreen.dart';
 import 'package:admin_gvm/startingScreen/onboarding_screen.dart';
@@ -55,7 +54,7 @@ class MyApp extends StatelessWidget {
         OnboardingScreen.id: (context) => const OnboardingScreen(),
         LoginScreen.id: (context) => const LoginScreen(),
         SignupScreen.id: (context) => const SignupScreen(),
-        DashboardScreen.id: (context) => const DashboardScreen(),
+        DashboardScreen.id: (context) => DashboardScreen(),
         ListPages.id: (context) => const ListPages(id: null,),
        // ForgotPasswordPage.id: (context) =>  ForgotPasswordPage(key: null,),
         Profilepage.id: (context) {
