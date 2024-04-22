@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:admin_gvm/Dashboard/profilepage.dart';
+import 'package:admin_gvm/startingScreen/forgotpassword.dart';
 import 'package:admin_gvm/startingScreen/loginScreen.dart';
 import 'package:admin_gvm/startingScreen/onboarding_screen.dart';
 import 'package:admin_gvm/startingScreen/signupPage.dart';
@@ -15,14 +16,15 @@ import 'Form/listpage.dart';
 
 //
 @pragma('vm:entry-point')
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message)async {
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 }
+
 Future<void> main() async {
   //
   WidgetsFlutterBinding.ensureInitialized();
-   // await Firebase.initializeApp();
-   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   WidgetsFlutterBinding.ensureInitialized();
   Platform.isAndroid
@@ -58,6 +60,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.id: (context) => const LoginScreen(),
         SignupScreen.id: (context) => const SignupScreen(),
         DashboardScreen.id: (context) => DashboardScreen(),
+        ForgotPasswordScr.id: (context) => ForgotPasswordScr(),
         ListPages.id: (context) => const ListPages(
               id: null,
             ),

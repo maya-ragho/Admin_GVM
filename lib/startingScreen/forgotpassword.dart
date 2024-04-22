@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
+class ForgotPasswordScr extends StatelessWidget {
+  static String id = 'forgotscreen';
   final TextEditingController email = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,9 @@ class ForgotPasswordScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
+                print(email.text);
                 try {
+                  print('inside try');
                   await FirebaseAuth.instance
                       .sendPasswordResetEmail(email: email.text.trim());
                   Navigator.pushNamed(context, LoginScreen.id);

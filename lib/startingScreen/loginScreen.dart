@@ -1,16 +1,19 @@
+import 'package:admin_gvm/startingScreen/forgotpassword.dart';
 import 'package:admin_gvm/startingScreen/signupPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import '../Dashboard/Dashboard_Screen.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
   static String id = 'loginscreen';
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
-class _LoginScreenState extends State<LoginScreen> {
 
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -35,8 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-        
-        
                       const Text('Login Screen',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 30)),
@@ -52,11 +53,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           prefixIcon: Icon(Icons.email_outlined),
                           labelStyle: const TextStyle(color: Colors.black),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(width: 2, color: Colors.black),
+                            borderSide:
+                                const BorderSide(width: 2, color: Colors.black),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(width: 3, color: Colors.blueGrey),
+                            borderSide: const BorderSide(
+                                width: 3, color: Colors.blueGrey),
                             borderRadius: BorderRadius.circular(15),
                           ),
                         ),
@@ -74,8 +77,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
-        
-        
                       const SizedBox(height: 20),
                       TextFormField(
                         controller: passwordController,
@@ -88,11 +89,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           prefixIcon: Icon(Icons.password),
                           labelStyle: const TextStyle(color: Colors.black),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(width: 2, color: Colors.black),
+                            borderSide:
+                                const BorderSide(width: 2, color: Colors.black),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(width: 3, color: Colors.blueGrey),
+                            borderSide: const BorderSide(
+                                width: 3, color: Colors.blueGrey),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           suffixIcon: IconButton(
@@ -117,7 +120,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
-        
                       const SizedBox(height: 20),
                       const SizedBox(height: 20),
                       ButtonTheme(
@@ -143,12 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 10),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ForgotPasswordScreen(),
-                            ),
-                          );
+                          Navigator.pushNamed(context, ForgotPasswordScr.id);
                         },
                         child: Text(
                           'Forgot Password?',
@@ -168,15 +165,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-        
-        
           ],
         ),
       ),
     );
   }
-
-
 
   Future<void> _signIn() async {
     String email = emailController.text;
@@ -206,17 +199,16 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     }
   }
+}
 
-  }
-
-class CurveAppBar extends CustomClipper<Path>{
+class CurveAppBar extends CustomClipper<Path> {
   @override
-  Path getClip(Size size){
+  Path getClip(Size size) {
     final Path path = Path();
-    path.moveTo(0,0);
+    path.moveTo(0, 0);
     path.lineTo(0, size.height - 20);
     path.quadraticBezierTo(
-        size.width / 5, size.height / 2.5, size.width /2, size.height - 50);
+        size.width / 5, size.height / 2.5, size.width / 2, size.height - 50);
     path.quadraticBezierTo(
         size.width * 3 / 4, size.height, size.width, size.height - 50);
     path.lineTo(size.width, 0);
@@ -225,16 +217,14 @@ class CurveAppBar extends CustomClipper<Path>{
   }
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper){
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
     throw SizedBox();
   }
 }
 
 class ForgotPasswordScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Forgot Password'),
@@ -271,5 +261,3 @@ class ForgotPasswordScreen extends StatelessWidget {
     );
   }
 }
-
-
